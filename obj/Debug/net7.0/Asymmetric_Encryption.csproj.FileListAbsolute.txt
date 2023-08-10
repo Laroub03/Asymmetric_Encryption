@@ -1,0 +1,15 @@
+C:\Users\Administrator\source\repos\Asymmetric_Encryption\Asymmetric_Encryption\bin\Debug\net7.0\Asymmetric_Encryption.exe
+C:\Users\Administrator\source\repos\Asymmetric_Encryption\Asymmetric_Encryption\bin\Debug\net7.0\Asymmetric_Encryption.deps.json
+C:\Users\Administrator\source\repos\Asymmetric_Encryption\Asymmetric_Encryption\bin\Debug\net7.0\Asymmetric_Encryption.runtimeconfig.json
+C:\Users\Administrator\source\repos\Asymmetric_Encryption\Asymmetric_Encryption\bin\Debug\net7.0\Asymmetric_Encryption.dll
+C:\Users\Administrator\source\repos\Asymmetric_Encryption\Asymmetric_Encryption\bin\Debug\net7.0\Asymmetric_Encryption.pdb
+C:\Users\Administrator\source\repos\Asymmetric_Encryption\Asymmetric_Encryption\obj\Debug\net7.0\Asymmetric_Encryption.csproj.AssemblyReference.cache
+C:\Users\Administrator\source\repos\Asymmetric_Encryption\Asymmetric_Encryption\obj\Debug\net7.0\Asymmetric_Encryption.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Administrator\source\repos\Asymmetric_Encryption\Asymmetric_Encryption\obj\Debug\net7.0\Asymmetric_Encryption.AssemblyInfoInputs.cache
+C:\Users\Administrator\source\repos\Asymmetric_Encryption\Asymmetric_Encryption\obj\Debug\net7.0\Asymmetric_Encryption.AssemblyInfo.cs
+C:\Users\Administrator\source\repos\Asymmetric_Encryption\Asymmetric_Encryption\obj\Debug\net7.0\Asymmetric_Encryption.csproj.CoreCompileInputs.cache
+C:\Users\Administrator\source\repos\Asymmetric_Encryption\Asymmetric_Encryption\obj\Debug\net7.0\Asymmetric_Encryption.dll
+C:\Users\Administrator\source\repos\Asymmetric_Encryption\Asymmetric_Encryption\obj\Debug\net7.0\refint\Asymmetric_Encryption.dll
+C:\Users\Administrator\source\repos\Asymmetric_Encryption\Asymmetric_Encryption\obj\Debug\net7.0\Asymmetric_Encryption.pdb
+C:\Users\Administrator\source\repos\Asymmetric_Encryption\Asymmetric_Encryption\obj\Debug\net7.0\Asymmetric_Encryption.genruntimeconfig.cache
+C:\Users\Administrator\source\repos\Asymmetric_Encryption\Asymmetric_Encryption\obj\Debug\net7.0\ref\Asymmetric_Encryption.dll

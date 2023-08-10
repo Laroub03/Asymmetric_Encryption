@@ -1,0 +1,23 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v7.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v7.0": {
+      "Asymmetric_Encryption/1.0.0": {
+        "runtime": {
+          "Asymmetric_Encryption.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "Asymmetric_Encryption/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}
