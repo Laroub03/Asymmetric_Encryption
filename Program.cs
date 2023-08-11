@@ -3,14 +3,21 @@ using System.Security.Cryptography;
 using System.Text;
 
 namespace Asymmetric_Encryption
-{ 
-    // Entry point of the program
+{
     class Program
     {
-        static void Main()
+        static void Main(string[] args)
         {
-            Receiver.Receive();
-            Sender.Send();
+            IDataConverter dataConverter = new DataConverter();
+            IPublicKeyImporter publicKeyImporter = new PublicKeyImporter(dataConverter);
+            IEncryptor encryptor = new Encryptor();
+            Sender sender = new Sender(publicKeyImporter, encryptor);
+            sender.Run();
+
+            IKeyContainer keyContainer = new KeyContainer("MyKeyContainer");
+            IDecryptor decryptor = new Decryptor(dataConverter);
+            Receiver receiver = new Receiver(keyContainer, decryptor);
+            receiver.Run();
         }
     }
 }

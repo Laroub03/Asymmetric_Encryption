@@ -1,35 +1,58 @@
 ﻿using System;
 using System.Security.Cryptography;
+using System.Text;
 
 namespace Asymmetric_Encryption
 {
-    class Receiver
+    internal class Receiver
     {
-        internal static void Receive()
+        private readonly IKeyContainer _keyContainer;
+        private readonly IDecryptor _decryptor;
+
+        public Receiver(IKeyContainer keyContainer, IDecryptor decryptor)
         {
-            using (RSACryptoServiceProvider rsaProvider = new RSACryptoServiceProvider())
-            {
-                Console.WriteLine("Public Exponent: " + BitConverter.ToString(rsaProvider.ExportParameters(false).Exponent));
-                Console.WriteLine("Modulus: " + BitConverter.ToString(rsaProvider.ExportParameters(false).Modulus));
+            _keyContainer = keyContainer;
+            _decryptor = decryptor;
+        }
 
-                Console.WriteLine();
+        public void Run()
+        {
+            // Create an RSA object with an associated key that is stored in a key container
+            RSACryptoServiceProvider rsa = _keyContainer.GetRSA();
 
-                Console.Write("Enter encrypted data (format as F9-9A-98-6F-BC-9F): ");
-                string encryptedInput = Console.ReadLine();
+            // Display public Exponent and Modulus
+            RSAParameters rsaParams = rsa.ExportParameters(false);
+            Console.WriteLine("Public Exponent: {0}", BitConverter.ToString(rsaParams.Exponent));
+            Console.WriteLine("Modulus: {0}", BitConverter.ToString(rsaParams.Modulus));
 
-                string[] encryptedBytesStr = encryptedInput.Split('-');
-                byte[] encryptedBytes = new byte[encryptedBytesStr.Length];
+            // User enters encrypted data
+            Console.Write("Enter encrypted data: ");
+            string encryptedData = Console.ReadLine();
 
-                for (int i = 0; i < encryptedBytesStr.Length; i++)
-                {
-                    encryptedBytes[i] = Convert.ToByte(encryptedBytesStr[i], 16);
-                }
+            // Decrypt data using private key
+            string decryptedData = _decryptor.DecryptData(rsa, encryptedData);
+            Console.WriteLine("Decrypted data: {0}", decryptedData);
+        }
+    }
+    public interface IDecryptor
+    {
+        string DecryptData(RSACryptoServiceProvider rsa, string encryptedData);
+    }
 
-                byte[] decryptedBytes = rsaProvider.Decrypt(encryptedBytes, false);
-                string decryptedText = System.Text.Encoding.UTF8.GetString(decryptedBytes);
+    public class Decryptor : IDecryptor
+    {
+        private readonly IDataConverter _dataConverter;
 
-                Console.WriteLine("Decrypted message: " + decryptedText);
-            }
+        public Decryptor(IDataConverter dataConverter)
+        {
+            _dataConverter = dataConverter;
+        }
+
+        public string DecryptData(RSACryptoServiceProvider rsa, string encryptedData)
+        {
+            byte[] encryptedBytes = _dataConverter.ConvertToByteArray(encryptedData);
+            byte[] decryptedBytes = rsa.Decrypt(encryptedBytes, RSAEncryptionPadding.Pkcs1);
+            return Encoding.UTF8.GetString(decryptedBytes);
         }
     }
 }

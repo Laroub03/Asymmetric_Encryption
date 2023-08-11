@@ -1,46 +1,53 @@
 ﻿using System;
 using System.Security.Cryptography;
+using System.Text;
 
 namespace Asymmetric_Encryption
 {
-    class Sender
+    internal class Sender
     {
-        internal static void Send()
+        private readonly IPublicKeyImporter _publicKeyImporter;
+        private readonly IEncryptor _encryptor;
+
+        public Sender(IPublicKeyImporter publicKeyImporter, IEncryptor encryptor)
         {
-            Console.Write("Enter public Exponent (format as F9-9A-98-6F-BC-9F): ");
-            string exponentInput = Console.ReadLine();
-            Console.Write("Enter Modulus (format as F9-9A-98-6F-BC-9F): ");
-            string modulusInput = Console.ReadLine();
+            _publicKeyImporter = publicKeyImporter;
+            _encryptor = encryptor;
+        }
 
-            string[] exponentBytesStr = exponentInput.Split('-');
-            string[] modulusBytesStr = modulusInput.Split('-');
+        public void Run()
+        {
+            // User enters public Exponent and Modulus
+            Console.Write("Enter public Exponent: ");
+            string exponentString = Console.ReadLine();
+            Console.Write("Enter Modulus: ");
+            string modulusString = Console.ReadLine();
 
-            byte[] exponentBytes = new byte[exponentBytesStr.Length];
-            byte[] modulusBytes = new byte[modulusBytesStr.Length];
+            // Import public key
+            RSACryptoServiceProvider rsa = _publicKeyImporter.ImportPublicKey(exponentString, modulusString);
 
-            for (int i = 0; i < exponentBytesStr.Length; i++)
-            {
-                exponentBytes[i] = Convert.ToByte(exponentBytesStr[i], 16);
-                modulusBytes[i] = Convert.ToByte(modulusBytesStr[i], 16);
-            }
+            // User enters message to encrypt
+            Console.Write("Enter message to encrypt: ");
+            string message = Console.ReadLine();
 
-            RSAParameters publicKeyParams = new RSAParameters
-            {
-                Exponent = exponentBytes,
-                Modulus = modulusBytes
-            };
+            // Encrypt message using public key
+            string encryptedData = _encryptor.EncryptData(rsa, message);
+            Console.WriteLine("Encrypted data: {0}", encryptedData);
+        }
+    }
 
-            using (RSACryptoServiceProvider rsaProvider = new RSACryptoServiceProvider())
-            {
-                rsaProvider.ImportParameters(publicKeyParams);
-                Console.WriteLine();
-                Console.Write("Enter message for encryption: ");
-                string message = Console.ReadLine();
+    public interface IEncryptor
+    {
+        string EncryptData(RSACryptoServiceProvider rsa, string message);
+    }
 
-                byte[] messageBytes = System.Text.Encoding.UTF8.GetBytes(message);
-                byte[] encryptedBytes = rsaProvider.Encrypt(messageBytes, false);
-                Console.WriteLine("Encrypted message: " + BitConverter.ToString(encryptedBytes));
-            }
+    public class Encryptor : IEncryptor
+    {
+        public string EncryptData(RSACryptoServiceProvider rsa, string message)
+        {
+            byte[] messageBytes = Encoding.UTF8.GetBytes(message);
+            byte[] encryptedBytes = rsa.Encrypt(messageBytes, false);
+            return BitConverter.ToString(encryptedBytes);
         }
     }
 }
