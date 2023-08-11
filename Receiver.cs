@@ -17,6 +17,8 @@ namespace Asymmetric_Encryption
 
         public void Run()
         {
+            try 
+            { 
             // Create an RSA object with an associated key that is stored in a key container
             RSACryptoServiceProvider rsa = _keyContainer.GetRSA();
 
@@ -32,8 +34,14 @@ namespace Asymmetric_Encryption
             // Decrypt data using private key
             string decryptedData = _decryptor.DecryptData(rsa, encryptedData);
             Console.WriteLine("Decrypted data: {0}", decryptedData);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("An error occurred: " + ex.Message);
+            }
         }
     }
+        
     public interface IDecryptor
     {
         string DecryptData(RSACryptoServiceProvider rsa, string encryptedData);

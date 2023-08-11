@@ -8,6 +8,8 @@ namespace Asymmetric_Encryption
     {
         static void Main(string[] args)
         {
+            try
+            { 
             // Initialize components for the sender's side
             IDataConverter dataConverter = new DataConverter();
             IPublicKeyImporter publicKeyImporter = new PublicKeyImporter(dataConverter);
@@ -19,7 +21,14 @@ namespace Asymmetric_Encryption
             IKeyContainer keyContainer = new KeyContainer("MyKeyContainer");
             IDecryptor decryptor = new Decryptor(dataConverter);
             Receiver receiver = new Receiver(keyContainer, decryptor);
-            receiver.Run();
+            receiver.Run();            
+            }
+            catch (InvalidCastException ex)
+            {
+                // Display an error message if an invalid cast exception occurs.
+                Console.WriteLine("Invalid casting: " + ex.Message);
+
+            }
         }
     }
 }

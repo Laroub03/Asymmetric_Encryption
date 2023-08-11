@@ -17,6 +17,8 @@ namespace Asymmetric_Encryption
 
         public void Run()
         {
+            try
+            {
             // User enters public Exponent and Modulus
             Console.Write("Enter public Exponent: ");
             string exponentString = Console.ReadLine();
@@ -33,9 +35,16 @@ namespace Asymmetric_Encryption
             // Encrypt message using public key
             string encryptedData = _encryptor.EncryptData(rsa, message);
             Console.WriteLine("Encrypted data: {0}", encryptedData);
+            }
+            catch (Exception ex)
+            {
+                // Display an error message if an exception occurs.
+                Console.WriteLine("An error occurred: " + ex.Message);
+            }
         }
-
-        public interface IEncryptor
+    }
+    
+    public interface IEncryptor
     {
         string EncryptData(RSACryptoServiceProvider rsa, string message);
     }
@@ -44,9 +53,11 @@ namespace Asymmetric_Encryption
     {
         public string EncryptData(RSACryptoServiceProvider rsa, string message)
         {
+
             byte[] messageBytes = Encoding.UTF8.GetBytes(message);
             byte[] encryptedBytes = rsa.Encrypt(messageBytes, false);
             return BitConverter.ToString(encryptedBytes);
+
         }
     }
 }
