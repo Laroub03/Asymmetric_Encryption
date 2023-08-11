@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace Asymmetric_Encryption
 {
+     // Class importing an public key using RSA
     internal class PublicKeyImporter : IPublicKeyImporter
     {
         private readonly IDataConverter _dataConverter;
@@ -32,6 +33,8 @@ namespace Asymmetric_Encryption
             return rsa;
         }
     }
+
+
     internal interface IPublicKeyImporter
     {
         RSACryptoServiceProvider ImportPublicKey(string exponentString, string modulusString);

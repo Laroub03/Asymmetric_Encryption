@@ -34,9 +34,8 @@ namespace Asymmetric_Encryption
             string encryptedData = _encryptor.EncryptData(rsa, message);
             Console.WriteLine("Encrypted data: {0}", encryptedData);
         }
-    }
 
-    public interface IEncryptor
+        public interface IEncryptor
     {
         string EncryptData(RSACryptoServiceProvider rsa, string message);
     }

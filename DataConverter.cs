@@ -10,6 +10,7 @@ namespace Asymmetric_Encryption
     {
         public byte[] ConvertToByteArray(string data)
         {
+            // Convert entered data into byte array and replace "-" with ""
             data = data.Replace("-", "");
             byte[] bytes = new byte[data.Length / 2];
 
@@ -21,6 +22,7 @@ namespace Asymmetric_Encryption
             return bytes;
         }
     }
+
     public interface IDataConverter
     {
         byte[] ConvertToByteArray(string data);

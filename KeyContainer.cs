@@ -7,11 +7,13 @@ using System.Threading.Tasks;
 
 namespace Asymmetric_Encryption
 {
+    // Interface for Key container
     internal interface IKeyContainer
     {
         RSACryptoServiceProvider GetRSA();
     }
 
+    // Implementation of key container using RSA
     internal class KeyContainer : IKeyContainer
     {
         private readonly string _containerName;
